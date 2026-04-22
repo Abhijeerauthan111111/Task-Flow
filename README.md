@@ -12,7 +12,7 @@ Two routes only:
 ## 1) Google OAuth settings
 Create OAuth Client ID (Web application) and set:
 - Authorized JavaScript origins: `http://localhost:5173`
-- Authorized redirect URIs: `http://localhost:4000/auth/google/callback`
+- Authorized redirect URIs: `http://localhost:4000/api/auth/google/callback`
 
 ## 2) Server setup
 From `todo-mern-google-auth/server`:
@@ -33,6 +33,28 @@ From `todo-mern-google-auth/client`:
 
 Client runs on `http://localhost:5173`.
 
+## Deploy to Vercel
+Recommended: deploy as a single Vercel project (static Vite app + serverless API).
+
+### Vercel settings
+- Root Directory: `todo-mern-google-auth` (if your repo root is different, point Vercel here)
+- Build Command: `npm run vercel-build`
+- Output Directory: `client/dist`
+
+### Vercel Environment Variables
+Set these in Vercel (Project → Settings → Environment Variables):
+- `MONGODB_URI`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
+- `GOOGLE_CALLBACK_URL` = `https://YOUR_VERCEL_DOMAIN/api/auth/google/callback`
+- `SESSION_SECRET`
+- `CLIENT_URL` = `https://YOUR_VERCEL_DOMAIN`
+
+### Google OAuth settings for production
+Update your Google OAuth client to include:
+- Authorized JavaScript origins: `https://YOUR_VERCEL_DOMAIN`
+- Authorized redirect URIs: `https://YOUR_VERCEL_DOMAIN/api/auth/google/callback`
+
 ## Quick success checklist
 - Visit `http://localhost:5173/login` → click “Continue with Google”
 - After callback you land on `/tasks`
@@ -40,4 +62,3 @@ Client runs on `http://localhost:5173`.
 - Filter All / Active / Done
 - Refresh page → todos still there (MongoDB)
 - Click “Sign out” → returns to `/login`
-

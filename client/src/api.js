@@ -21,8 +21,8 @@ async function request(path, options = {}) {
 }
 
 export const api = {
-  me: () => request("/auth/me"),
-  logout: () => request("/auth/logout", { method: "POST" }),
+  me: () => request("/api/auth/me"),
+  logout: () => request("/api/auth/logout", { method: "POST" }),
   updateMe: (payload) => request("/api/me", { method: "PUT", body: JSON.stringify(payload) }),
 
   listTodos: (status) => request(`/api/todos?status=${encodeURIComponent(status)}`),
@@ -31,4 +31,3 @@ export const api = {
   toggleTodo: (id) => request(`/api/todos/${id}/toggle`, { method: "PATCH" }),
   deleteTodo: (id) => request(`/api/todos/${id}`, { method: "DELETE" })
 };
-

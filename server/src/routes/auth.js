@@ -12,8 +12,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/auth/failure" }),
   (req, res) => {
-    const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
-    res.redirect(`${clientUrl}/tasks`);
+    res.redirect("/tasks");
   }
 );
 
@@ -39,4 +38,3 @@ router.post("/logout", (req, res, next) => {
 });
 
 module.exports = router;
-

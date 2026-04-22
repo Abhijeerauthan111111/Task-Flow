@@ -7,9 +7,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": { target: API_URL, changeOrigin: true, secure: false },
-      "/auth": { target: API_URL, changeOrigin: true, secure: false }
+      "/api": { target: API_URL, changeOrigin: true, secure: false }
     }
   }
 });
-

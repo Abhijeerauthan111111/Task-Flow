@@ -24,7 +24,7 @@ export default function LoginPage() {
 
   function startGoogle() {
     setError("");
-    window.location.href = "/auth/google";
+    window.location.href = "/api/auth/google";
   }
 
   if (checking) return <div className="page">Checking session…</div>;
@@ -42,4 +42,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
