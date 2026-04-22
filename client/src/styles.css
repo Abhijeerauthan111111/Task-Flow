@@ -113,8 +113,30 @@ body {
 }
 
 .topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-meta {
   display: grid;
   gap: 4px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.avatar-fallback {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .filters {
@@ -224,4 +246,3 @@ body {
 .modal-title {
   margin: 0;
 }
-

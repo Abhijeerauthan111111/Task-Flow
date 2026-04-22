@@ -190,10 +190,13 @@ export default function TasksPage() {
     <div className="page">
       <div className="topbar">
         <div className="topbar-left">
-          <div className="title">Tasks</div>
-          <div className="muted small">
-            {user?.email ? `Signed in as ${user.email}` : "Signed in"}
-            {usingCache ? " (cached)" : ""}
+          <Avatar name={user?.name} photoUrl={user?.photoUrl} />
+          <div className="topbar-meta">
+            <div className="title">Tasks</div>
+            <div className="muted small">
+              {user?.email ? `Signed in as ${user.email}` : "Signed in"}
+              {usingCache ? " (cached)" : ""}
+            </div>
           </div>
         </div>
         <button className="btn secondary" onClick={onLogout}>
@@ -294,6 +297,14 @@ export default function TasksPage() {
       ) : null}
     </div>
   );
+}
+
+function Avatar({ name, photoUrl }) {
+  const letter = (name || "?").trim().slice(0, 1).toUpperCase();
+  if (photoUrl) {
+    return <img className="avatar" src={photoUrl} alt={name ? `${name} avatar` : "User avatar"} referrerPolicy="no-referrer" />;
+  }
+  return <div className="avatar avatar-fallback">{letter}</div>;
 }
 
 function TodoRow({ todo, onToggle, onDelete, onEditTitle }) {
