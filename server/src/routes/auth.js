@@ -10,9 +10,10 @@ router.get(
 
 router.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: "/auth/failure" }),
+  passport.authenticate("google", { failureRedirect: "/api/auth/failure" }),
   (req, res) => {
-    res.redirect("/tasks");
+    const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
+    res.redirect(`${clientUrl}/tasks`);
   }
 );
 
