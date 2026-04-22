@@ -1,4 +1,4 @@
-const { getApp } = require("../server/src/app");
+const { getApp } = require("../src/app");
 
 let appPromise;
 
