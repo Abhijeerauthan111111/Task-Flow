@@ -53,7 +53,9 @@ async function getApp() {
       }),
       cookie: {
         httpOnly: true,
-        sameSite: "lax",
+        // If frontend and backend are on different domains, you must use SameSite=None + Secure.
+        // Set COOKIE_SAMESITE=none on Vercel/production split deployments.
+        sameSite: process.env.COOKIE_SAMESITE || "lax",
         secure: process.env.NODE_ENV === "production",
         maxAge: 1000 * 60 * 60 * 24 * 7
       }
@@ -79,4 +81,3 @@ async function getApp() {
 }
 
 module.exports = { getApp };
-

@@ -55,6 +55,33 @@ Update your Google OAuth client to include:
 - Authorized JavaScript origins: `https://YOUR_VERCEL_DOMAIN`
 - Authorized redirect URIs: `https://YOUR_VERCEL_DOMAIN/api/auth/google/callback`
 
+## Deploy split (frontend + backend on different URLs)
+If you deploy the backend separately (Render/Railway/Fly/Vercel project), do this:
+
+### Vercel split (two Vercel projects from one repo)
+Create 2 separate Vercel projects pointing to the same GitHub repo:
+
+**Frontend project**
+- Root Directory: `todo-mern-google-auth/client`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Env var: `VITE_API_URL=https://YOUR_BACKEND_DOMAIN`
+
+**Backend project**
+- Root Directory: `todo-mern-google-auth`
+- No special build settings needed (serverless function is `api/[...all].js`)
+- Env vars: `MONGODB_URI`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `SESSION_SECRET`, `CLIENT_URL`, `COOKIE_SAMESITE`, `GOOGLE_CALLBACK_URL`
+
+### Backend
+- Set `CLIENT_URL=https://YOUR_FRONTEND_DOMAIN`
+- Set `GOOGLE_CALLBACK_URL=https://YOUR_BACKEND_DOMAIN/api/auth/google/callback`
+- Set `COOKIE_SAMESITE=none` (required for cross-site cookies)
+- Ensure HTTPS (cookies require `Secure` when SameSite is `none`)
+
+### Frontend
+- Set `VITE_API_URL=https://YOUR_BACKEND_DOMAIN` (see `todo-mern-google-auth/client/.env.example`)
+- Login button will send the browser to `${VITE_API_URL}/api/auth/google`
+
 ## Quick success checklist
 - Visit `http://localhost:5173/login` → click “Continue with Google”
 - After callback you land on `/tasks`

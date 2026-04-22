@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../api";
+import { api, API_BASE } from "../api";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export default function LoginPage() {
 
   function startGoogle() {
     setError("");
-    window.location.href = "/api/auth/google";
+    window.location.href = API_BASE ? `${API_BASE}/api/auth/google` : "/api/auth/google";
   }
 
   if (checking) return <div className="page">Checking session…</div>;
